@@ -1,1 +1,1 @@
-#Node Typescript Seed Project
+#NODE TS SEED

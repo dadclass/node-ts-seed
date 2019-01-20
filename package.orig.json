@@ -1,5 +1,5 @@
 {
-  "name": "NODE-TS-SEED",
+  "name": "node-ts-seed",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -13,15 +13,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/<change-me>.git"
+    "url": "git+https://github.com/dadclass/node-ts-seed.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/<change-me>/issues"
+    "url": "https://github.com/dadclass/node-ts-seed/issues"
   },
-  "homepage": "https://github.com/<change-me>#readme",
+  "homepage": "https://github.com/dadclass/node-ts-seed#readme",
   "devDependencies": {
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.5",

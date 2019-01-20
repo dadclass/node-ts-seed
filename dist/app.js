@@ -41,11 +41,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var fs_1 = __importDefault(require("fs"));
 var path_1 = __importDefault(require("path"));
 var util_1 = __importDefault(require("util"));
+var logger_1 = __importDefault(require("./logger"));
 var App = /** @class */ (function () {
     function App() {
-        this.README_FILE = "README.1.md";
-        this.PKG_LOCK_FILE = "package-lock.1.json";
-        this.PKG_FILE = "package.1.json";
+        this.README_FILE = "README.md";
+        this.PKG_LOCK_FILE = "package-lock.json";
+        this.PKG_FILE = "package.json";
         this.WRITE = util_1.default.promisify(fs_1.default.writeFile);
         this.READ = util_1.default.promisify(fs_1.default.readFile);
     }
@@ -64,6 +65,14 @@ var App = /** @class */ (function () {
             return word[0].toUpperCase() + word.substr(1);
         })
             .join(" ");
+    };
+    App.prototype.resetProject = function (fileName, fileContent, rxSearch, strReplace) {
+        if (fileName === this.PKG_FILE) {
+            return fileContent
+                .replace(rxSearch, projectName)
+                .replace(/dadclass\/node-ts-seed/g, "<change-me>");
+        }
+        return fileContent.replace(rxSearch, strReplace);
     };
     App.prototype.initFile = function (fileName, rxSearch, strReplace) {
         return __awaiter(this, void 0, void 0, function () {
@@ -85,35 +94,25 @@ var App = /** @class */ (function () {
                         return [4 /*yield*/, this.READ(filePath, "utf8")];
                     case 4:
                         data = _a.sent();
-                        console.log(data);
                         return [3 /*break*/, 6];
                     case 5:
                         err_1 = _a.sent();
-                        console.log("initFile>>> $err");
+                        logger_1.default.error("initFile>>> " + err_1);
                         return [3 /*break*/, 6];
                     case 6: return [2 /*return*/];
                 }
             });
         });
     };
-    App.prototype.resetProject = function (fileName, fileContent, rxSearch, strReplace) {
-        if (fileName === this.PKG_FILE) {
-            return fileContent
-                .replace(rxSearch, projectName)
-                .replace(/dadclass\/node-ts-seed/g, "<change-me>");
-        }
-        return fileContent.replace(rxSearch, strReplace);
-    };
     return App;
 }());
 exports.App = App;
 var app = new App();
-// const projectName = app.getProjectName();
-// const projectDesc = app.capWords(projectName);
-// console.log(`project name is ${projectName}`);
-// console.log(`project desc is ${projectDesc}`);
-var projectDesc = "My New Project";
-var projectName = "my-new-project";
-app.initFile(app.README_FILE, /Node Typescript Seed Project/, projectDesc);
-app.initFile(app.PKG_LOCK_FILE, /node-ts-seed/, projectName);
-app.initFile(app.PKG_FILE, /node-ts-seed/, projectName);
+var projectName = app.getProjectName();
+logger_1.default.debug("project name is " + projectName);
+var projectDesc = app.capWords(projectName);
+logger_1.default.debug("project description is " + projectDesc);
+app.initFile(app.README_FILE, /Node Typescript Seed Project/, projectDesc.toUpperCase());
+app.initFile(app.PKG_LOCK_FILE, /node-ts-seed/, projectName.toUpperCase());
+app.initFile(app.PKG_FILE, /node-ts-seed/, projectName.toUpperCase());
+//# sourceMappingURL=app.js.map
