@@ -4,16 +4,16 @@ import util from 'util';
 import logger from './logger';
 
 export class App {
-  public readonly README_FILE: string = path.join(__dirname, '../README.md');
-  public readonly PKG_LOCK_FILE: string = path.join(__dirname, '../package-lock.json');
-  public readonly PKG_FILE: string = path.join(__dirname, '../package.json');
+  protected readonly PROJECT_ROOT: string = process.cwd();
+  public readonly README_FILE: string = this.PROJECT_ROOT + '/README.md';
+  public readonly PKG_LOCK_FILE: string = this.PROJECT_ROOT + '/package-lock.json';
+  public readonly PKG_FILE: string = path.join(__dirname, '../package.json'); // __dirname is where current file (app.ts) is located
 
-  public readonly WRITE = util.promisify(fs.writeFile);
-  public readonly READ = util.promisify(fs.readFile);
+  private readonly WRITE = util.promisify(fs.writeFile); // promisify() wraps fs.writeFile() to return a Promise
+  private readonly READ = util.promisify(fs.readFile);
 
   public getProjectName(): string {
-    const projectRootPath: string = process.cwd();
-    return projectRootPath.substring(projectRootPath.lastIndexOf(path.sep) + 1);
+    return this.PROJECT_ROOT.substring(this.PROJECT_ROOT.lastIndexOf(path.sep) + 1);
   }
 
   public capWords(str: string): string {
@@ -34,7 +34,6 @@ export class App {
   }
 
   public async initFile(filePath: string, rxSearch: RegExp, strReplace: string) {
-    // const filePath: string = path.join(__dirname, `../${filename}`)
 
     let data: string;
     try {
@@ -47,6 +46,7 @@ export class App {
     }
   }
 }
+
 const app = new App();
 
 const projectName = app.getProjectName();
@@ -54,6 +54,6 @@ logger.debug(`project name is ${projectName}`);
 const projectDesc = app.capWords(projectName);
 logger.debug(`project description is ${projectDesc}`);
 
-app.initFile(app.README_FILE, /Node Typescript Seed Project/, projectDesc.toUpperCase());
+app.initFile(app.README_FILE, /Node Typescript Seed Project/, projectDesc.toUpperCase()); // TODO: remove toUpperCase()
 app.initFile(app.PKG_LOCK_FILE, /node-ts-seed/, projectName.toUpperCase());
 app.initFile(app.PKG_FILE, /node-ts-seed/, projectName.toUpperCase());

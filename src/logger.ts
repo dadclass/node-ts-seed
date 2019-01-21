@@ -1,20 +1,23 @@
-import winston from 'winston';
+import winston, { format } from 'winston';
+import path from 'path';
 
-const appRoot = process.cwd();
+const logPath = process.cwd() + '/logs/app.log';
+const logLevel = process.env.LOG_lEVEL || 'debug';
 
 const options = {
   console: {
-    colorize: true,
-    handleExceptions: true,
-    json: false,
-    level: 'debug',
+    // colorize: true,
+    // handleExceptions: true,
+    // json: false,
+    //level: 'debug'
   },
+
   file: {
     colorize: false,
-    filename: `${appRoot}/logs/app.log`,
-    handleExceptions: true,
+    filename: logPath,
+    // handleExceptions: true,
     json: true,
-    level: 'debug',
+    // level: logFileLevel,
     maxFiles: 5,
     maxsize: 5242880, // 5MB
   },
@@ -24,7 +27,13 @@ const options = {
 // new winston.Logger
 const logger = winston.createLogger({
   exitOnError: false, // do not exit on handled exceptions
-  transports: [new winston.transports.File(options.file), new winston.transports.Console(options.console)],
+  format: format.combine(
+    // format.label({ label: '[my-label]' }),
+    format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss.SSS' }),
+    format.printf(info => `${info.timestamp} ${info.level}: ${info.message}`),
+  ),
+  level: logLevel,
+  transports: [new winston.transports.File(options.file), new winston.transports.Console()],
 });
 
 export default logger;
