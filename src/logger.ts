@@ -28,7 +28,6 @@ const options = {
 const logger = winston.createLogger({
   exitOnError: false, // do not exit on handled exceptions
   format: format.combine(
-    // format.label({ label: '[my-label]' }),
     format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss.SSS' }),
     format.printf(info => `${info.timestamp} ${info.level}: ${info.message}`),
   ),
