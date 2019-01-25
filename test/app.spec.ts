@@ -9,7 +9,7 @@ describe('App', () => {
     });
 
     it('getProjectName() returns project root folder name', () => {
-        expect(app.getProjectName()).to.equal('node-ts-seed');
+        expect(app.getProjectName()).to.equal('<change-to-project-root-folder-name>');
     });
 
     it('capWords() returns capitalized words separated by spaces from the input of hyphen separated words', () => {

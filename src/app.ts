@@ -9,6 +9,7 @@ export class App {
   public readonly README_FILE: string = this.PROJECT_ROOT + '/README.md';
   public readonly PKG_LOCK_FILE: string = this.PROJECT_ROOT + '/package-lock.json';
   public readonly PKG_FILE: string = path.join(__dirname, '../package.json'); // __dirname is where current file (app.ts) is located
+  public readonly TEST_FILE: string = this.PROJECT_ROOT + '/test/app.spec.ts';
   public readonly CALLER = path.basename(__filename);
 
   private readonly WRITE = util.promisify(fs.writeFile); // promisify() wraps fs.writeFile() to return a Promise
@@ -56,6 +57,7 @@ log.debug(app.CALLER, `project name is ${projectName}`);
 const projectDesc = app.capWords(projectName);
 log.debug(app.CALLER, `project description is ${projectDesc}`);
 
-app.initFile(app.README_FILE, /Node Typescript Seed Project/, projectDesc.toUpperCase()); // TODO: remove toUpperCase()
-app.initFile(app.PKG_LOCK_FILE, /node-ts-seed/, projectName.toUpperCase());
-app.initFile(app.PKG_FILE, /node-ts-seed/, projectName.toUpperCase());
+app.initFile(app.README_FILE, /Node Typescript Seed Project/, projectDesc);
+app.initFile(app.PKG_LOCK_FILE, /node-ts-seed/, projectName);
+app.initFile(app.PKG_FILE, /node-ts-seed/, projectName);
+app.initFile(app.TEST_FILE, /node-ts-seed/, projectName);
