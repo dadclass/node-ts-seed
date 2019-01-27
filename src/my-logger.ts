@@ -1,14 +1,14 @@
 import logger from './logger';
 
-function debug(caller: string, message: string): void {
+const debug = (caller: string, message: string): void => {
     logger.debug(`[${caller}] ${message}`);
 }
 
-function info(caller: string, message: string): void {
+const info = (caller: string, message: string): void => {
     logger.info(`[${caller}] ${message}`);
 }
 
-function warn(caller: string, message: string): void {
+const warn = (caller: string, message: string): void => {
     logger.warn(`[${caller}] ${message}`);
 }
 
@@ -17,10 +17,10 @@ function error(caller: string, message: string): void {
 }
 
 const log =  {
-    debug: debug,
-    info: info,
-    warn: warn,
-    error: error
+    debug,
+    error,
+    info,
+    warn
 }
 
 export default log;

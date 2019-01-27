@@ -4,13 +4,17 @@ import util from 'util';
 import log from './my-logger';
 
 export class App {
-  protected readonly PROJECT_ROOT: string = process.cwd();
 
+  public readonly PROJECT_ROOT: string = process.cwd();
   public readonly README_FILE: string = this.PROJECT_ROOT + '/README.md';
   public readonly PKG_LOCK_FILE: string = this.PROJECT_ROOT + '/package-lock.json';
-  public readonly PKG_FILE: string = path.join(__dirname, '../package.json'); // __dirname is where current file (app.ts) is located
+
+  // __dirname is where current file (app.ts) is located
+  public readonly PKG_FILE: string = path.join(__dirname, '../package.json');
   public readonly TEST_FILE: string = this.PROJECT_ROOT + '/test/app.spec.ts';
-  public readonly CALLER = path.basename(__filename);
+  public readonly LOGGEE: string = path.basename(__filename);
+  public readonly OLD_PROJECT_NAME: RegExp = /node-ts-seed/;
+  public readonly OLD_PROJECT_DESC: RegExp = /Node Typescript Seed Project/;
 
   private readonly WRITE = util.promisify(fs.writeFile); // promisify() wraps fs.writeFile() to return a Promise
   private readonly READ = util.promisify(fs.readFile);
@@ -45,7 +49,7 @@ export class App {
       await this.WRITE(filePath, replaced);
       data = await this.READ(filePath, 'utf8');
     } catch (err) {
-      log.error(this.CALLER, `${err}`);
+      log.error(this.LOGGEE, `${err}`);
     }
   }
 }
@@ -53,11 +57,15 @@ export class App {
 const app = new App();
 
 const projectName = app.getProjectName();
-log.debug(app.CALLER, `project name is ${projectName}`);
+log.debug(app.LOGGEE, `project name is ${projectName}`);
 const projectDesc = app.capWords(projectName);
-log.debug(app.CALLER, `project description is ${projectDesc}`);
 
-app.initFile(app.README_FILE, /Node Typescript Seed Project/, projectDesc);
-app.initFile(app.PKG_LOCK_FILE, /node-ts-seed/, projectName);
-app.initFile(app.PKG_FILE, /node-ts-seed/, projectName);
-app.initFile(app.TEST_FILE, /node-ts-seed/, projectName);
+app.initFile(app.README_FILE, app.OLD_PROJECT_DESC, projectDesc);
+log.debug(app.LOGGEE, `${app.OLD_PROJECT_DESC} in ${app.README_FILE} has been replaced to ${projectDesc}`);
+app.initFile(app.PKG_LOCK_FILE, app.OLD_PROJECT_NAME, projectName);
+log.debug(app.LOGGEE, `${app.OLD_PROJECT_NAME} in ${app.PKG_LOCK_FILE} has been replaced to ${projectName}`);
+app.initFile(app.PKG_FILE, app.OLD_PROJECT_NAME, projectName);
+log.debug(app.LOGGEE, `${app.OLD_PROJECT_NAME} in ${app.PKG_FILE} has been replaced to ${projectName}`);
+app.initFile(app.TEST_FILE, app.OLD_PROJECT_NAME, projectName);
+log.debug(app.LOGGEE, `${app.OLD_PROJECT_NAME} in ${app.TEST_FILE} has been replaced to ${projectName}`);
+

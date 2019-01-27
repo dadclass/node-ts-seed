@@ -1,5 +1,5 @@
-import winston, { format } from 'winston';
 import path from 'path';
+import winston, { format } from 'winston';
 
 const logPath = process.cwd() + '/logs/app.log';
 const logLevel = process.env.LOG_lEVEL || 'debug';
@@ -9,7 +9,7 @@ const options = {
     // colorize: true,
     // handleExceptions: true,
     // json: false,
-    //level: 'debug'
+    // level: 'debug'
   },
 
   file: {
