@@ -13,30 +13,30 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dadclass/node-ts-seed.git"
+    "url": "git+https://github.com/<change-me>.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dadclass/node-ts-seed/issues"
+    "url": "https://github.com/<change-me>/issues"
   },
-  "homepage": "https://github.com/dadclass/node-ts-seed#readme",
+  "homepage": "https://github.com/<change-me>#readme",
   "devDependencies": {
     "@types/chai": "^4.1.7",
-    "@types/mocha": "^5.2.5",
-    "@types/node": "^10.12.18",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^10.14.8",
     "@types/winston": "^2.4.4",
     "chai": "^4.2.0",
     "mocha": "^5.2.0",
-    "nodemon": "^1.18.9",
-    "prettier": "^1.15.3",
+    "nodemon": "^1.19.1",
+    "prettier": "^1.18.0",
     "ts-node": "^7.0.1",
-    "tslint": "^5.12.1",
-    "tslint-config-prettier": "^1.17.0",
-    "typescript": "^3.2.2"
+    "tslint": "^5.17.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.5.1"
   },
   "dependencies": {
-    "winston": "^3.1.0"
+    "winston": "^3.2.1"
   }
 }
