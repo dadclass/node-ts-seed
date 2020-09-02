@@ -23,20 +23,20 @@
   },
   "homepage": "https://github.com/<change-me>#readme",
   "devDependencies": {
-    "@types/chai": "^4.2.3",
+    "@types/chai": "^4.2.12",
     "@types/mocha": "^5.2.7",
-    "@types/node": "^10.14.19",
+    "@types/node": "^10.17.28",
     "@types/winston": "^2.4.4",
     "chai": "^4.2.0",
     "mocha": "^5.2.0",
-    "nodemon": "^1.19.3",
-    "prettier": "^1.18.2",
+    "nodemon": "^1.19.4",
+    "prettier": "^1.19.1",
     "ts-node": "^7.0.1",
-    "tslint": "^5.20.0",
+    "tslint": "^5.20.1",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.6.3"
+    "typescript": "^3.9.7"
   },
   "dependencies": {
-    "winston": "^3.2.1"
+    "winston": "^3.3.3"
   }
 }
