@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "start": "npm run build:live",
     "build": "tsc -p .",
     "build:live": "nodemon --watch src/**/*.ts --exec ts-node src/app.ts",
@@ -22,12 +23,16 @@
     "url": "https://github.com/<change-me>/issues"
   },
   "homepage": "https://github.com/<change-me>#readme",
+  "resolutions": {
+    "minimist": "^1.2.5"
+  },
   "devDependencies": {
     "@types/chai": "^4.2.12",
     "@types/mocha": "^5.2.7",
     "@types/node": "^10.17.28",
     "@types/winston": "^2.4.4",
     "chai": "^4.2.0",
+    "minimist": "^1.2.5",
     "mocha": "^5.2.0",
     "nodemon": "^1.19.4",
     "prettier": "^1.19.1",
